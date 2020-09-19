@@ -1,0 +1,126 @@
+<!-- This is an HTML tag <html> -->
+<!-- In the <head> tag goes all the doc set up-->
+<!-- In the <body> tag: all visible content of the page-->
+<!-- Head (Goes up to h6)-->
+
+<!DOCTYPE html>
+<html lang="en">  <!--lang is an attribute-->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TutorFinder | Your Platform for Online Studies</title>
+    
+    <link rel="stylesheet" href="/styles/main.css">
+    <link rel="stylesheet" href="/styles/partials/header.css">
+    <link rel="stylesheet" href="/styles/partials/forms.css">
+    <link rel="stylesheet" href="/styles/partials/page-give-classes.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;700&amp;family=Poppins:wght@400;600&amp;display=swap" rel="stylesheet">
+
+    <script src="/scripts/addField.js" defer></script>
+</head>
+
+
+<body id="page-give-classes">
+    <div id="container">
+        <header class="page-header">
+            <div class="top-bar-container">
+                <a href="/">
+                    <img src="/images/icons/back.svg" alt="back">
+                </a>
+                <img src="images/logo.svg" alt="Proffy">
+            </div>
+
+            <div class="header-content">
+                <strong>Amazing!! Being a proffy is a great way to help others</strong>
+                <p>First, you need to complete this form</p>
+            </div>
+        </header>
+
+        <main>
+            <form action="/save-classes" id="create-class" method="POST">
+                <fieldset>
+                    <legend>Your data</legend>
+
+                    <div class="input-block">
+                        <label for="name">Full Name</label>
+                        <input name="name" id="name" required>
+                    </div>
+
+                    <div class="input-block">
+                        <label for="avatar">Link to your profile pic <small>(start with https://)</small></label>
+                        <input name="avatar" id="avatar" type="url" required>
+                    </div>
+
+                    <div class="input-block">
+                        <label for="whatsapp">Whatsapp <small>(Only numbers)</small></label>
+                        <input name="whatsapp" id="whatsapp" type="number" required>
+                    </div>
+
+                    <div class="textarea-block">
+                        <label for="bio">Bio</label>
+                        <textarea name="bio" id="bio" required></textarea>
+                    </div>
+
+            </fieldset>
+
+            <fieldset>
+                <legend>Describe your class</legend>
+                <div class="select-block">
+                    <label for="subject">Subject</label>
+                    <select name="subject" id="subject" required>
+                        <option value="">Select an option</option>
+                        {%for subject in subjects %}
+                            <option value="{{loop.index}}">{{subject}}</option>
+                        {%endfor%}
+                    </select>
+                </div>
+
+                <div class="input-block">
+                    <label for="cost">Price per hour <small>($)</small></label>
+                    <input name="cost" type="cost" id="cost" type="number" required>
+                </div>
+
+            </fieldset>
+
+            <fieldset id="schedule-items">
+                <legend>Available hours
+                    <button type="button" id="add-time">+ New time</button>
+                </legend>
+
+                <div class="schedule-item">
+                    <div class="select-block">
+                        <label for="weekday">Weekday</label>
+                        <select name="weekday[]" required>
+                            <option value="">Select an option</option>
+                            {%for weekday in weekdays %}
+                                <option value="{{loop.index0}}">{{weekday}}</option>
+                            {%endfor%}
+                        </select>
+                    </div>
+
+                    <div class="input-block">
+                        <label for="time_from">From</label>
+                        <input type="time" name="time_from[]" required>
+                    </div>
+
+                    <div class="input-block">
+                        <label for="time_to">Until</label>
+                        <input type="time" name="time_to[]" required>
+                    </div>
+                </div>
+            </fieldset>
+            </form>
+
+            <footer>
+                <p>
+                    <img src="/images/icons/warning.svg" alt="Aviso Importante">
+                    Attention! <br>
+                    Please fill all the blanks
+                </p>
+                <button type="submit" form="create-class">Save Profile</button>
+            </footer>
+        </main>
+    </div>
+</body>
+</html>
